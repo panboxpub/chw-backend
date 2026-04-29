@@ -7,12 +7,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// TEST ROOT
 app.get("/", (req, res) => {
   res.json({ status: "Backend running" });
 });
 
-// 🔥 REQUIRED CHAT ROUTE
 app.post("/chat", async (req, res) => {
   try {
     const r = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -31,10 +29,9 @@ app.post("/chat", async (req, res) => {
     res.json(data);
 
   } catch (e) {
-    console.error("ERROR:", e);
+    console.error(e);
     res.status(500).json({ error: "Server error" });
   }
 });
 
-app.listen(3000, () => console.log("Server running"));
-// redeploy trigger
+app.listen(3000);
